@@ -58,7 +58,7 @@ func main() {
 			if len(args) == 1 {
 				errorEmbed := &discordgo.MessageEmbed{
 					Description: "Please provide a message to say",
-					Color:       0xD93104,
+					Color:       0xC20C00,
 				}
 				s.ChannelMessageSendEmbed(m.ChannelID, errorEmbed)
 				break
@@ -78,7 +78,7 @@ func main() {
 			// send embed
 			embed := &discordgo.MessageEmbed{
 				Description: newMessage,
-				Color:       0x04ACD9,
+				Color:       0x00B6C2,
 			}
 			s.ChannelMessageSendEmbed(m.ChannelID, embed)
 		}

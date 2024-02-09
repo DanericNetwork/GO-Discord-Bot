@@ -71,7 +71,12 @@ func main() {
 				}
 			}
 			newMessage := strings.Join(letters, "")
-			s.ChannelMessageSend(m.ChannelID, newMessage)
+			// send embed
+			embed := &discordgo.MessageEmbed{
+				Description: newMessage,
+				Color:       0x04ACD9,
+			}
+			s.ChannelMessageSendEmbed(m.ChannelID, embed)
 		}
 	})
 

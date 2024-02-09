@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-discord-bot/commands"
 	"log"
 	"os"
 	"os/signal"
@@ -32,6 +33,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	sess.AddHandler(commands.HandleCommand)
+
 	sess.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if m.Author.ID == s.State.User.ID {
 			return
@@ -54,33 +57,6 @@ func main() {
 
 			message := "Helloooooo, " + strings.Join(args[1:], " ")
 			s.ChannelMessageSend(m.ChannelID, message)
-		case SayCommand:
-			if len(args) == 1 {
-				errorEmbed := &discordgo.MessageEmbed{
-					Description: "Please provide a message to say",
-					Color:       0xC20C00,
-				}
-				s.ChannelMessageSendEmbed(m.ChannelID, errorEmbed)
-				break
-			}
-
-			message := strings.Join(args[1:], " ")
-			letters := strings.Split(message, "")
-			for i, letter := range letters {
-				if !strings.ContainsAny(letter, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-					continue
-				}
-				if letter != " " {
-					letters[i] = ":regional_indicator_" + strings.ToLower(letter) + ":"
-				}
-			}
-			newMessage := strings.Join(letters, "")
-			// send embed
-			embed := &discordgo.MessageEmbed{
-				Description: newMessage,
-				Color:       0x00B6C2,
-			}
-			s.ChannelMessageSendEmbed(m.ChannelID, embed)
 		}
 	})
 

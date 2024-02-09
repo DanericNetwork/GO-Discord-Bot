@@ -68,7 +68,7 @@ func main() {
 	}
 	defer sess.Close()
 
-	fmt.Println("Bot is running...")
+	fmt.Println("Logged in as", sess.State.User.Username+"#"+sess.State.User.Discriminator)
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)

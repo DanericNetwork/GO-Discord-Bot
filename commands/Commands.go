@@ -10,7 +10,7 @@ import (
 var Commands = map[string]func(s *discordgo.Session, m *discordgo.MessageCreate){
 	"start": Start,
 	"say":   Say,
-	// Add other commands here
+	"insta": Insta,
 }
 
 func HandleCommand(s *discordgo.Session, m *discordgo.MessageCreate) {

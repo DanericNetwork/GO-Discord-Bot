@@ -56,7 +56,11 @@ func main() {
 			s.ChannelMessageSend(m.ChannelID, message)
 		case SayCommand:
 			if len(args) == 1 {
-				s.ChannelMessageSend(m.ChannelID, "Nothing to say")
+				errorEmbed := &discordgo.MessageEmbed{
+					Description: "Please provide a message to say",
+					Color:       0xD93104,
+				}
+				s.ChannelMessageSendEmbed(m.ChannelID, errorEmbed)
 				break
 			}
 
